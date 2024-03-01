@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,17 +17,30 @@ namespace StudentRegistrationApplication
         {
            
             InitializeComponent();
+            string[] array = { "January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
             for (int i = 1; i <= 31; i++)
             {
                 comboBox1.Items.Add(i);
             }
-            for (int i = 1; i <= 12; i++)
-            {
-                comboBox2.Items.Add(i);
-            }
+
             for (int i = 1900; i <= 2024; i++)
             {
                 comboBox3.Items.Add(i);
+            }
+            
+            foreach (string month in array)
+            {
+                comboBox2.Items.Add(month);
+            }
+            ArrayList arrayList = new ArrayList();
+            arrayList.Add("Bachelor of Science in Computer Science");
+            arrayList.Add("Bachelor of Science in Information Technology");
+            arrayList.Add("Bachelor of Science in Information Systems");
+            arrayList.Add("Bachelor of Science in Computer Engineering");
+
+            foreach (string prog in arrayList)
+            {
+                comboBox4.Items.Add(prog);
             }
 
         }
@@ -73,7 +87,7 @@ namespace StudentRegistrationApplication
                 gender = radioButton2.Text;
             }
             MessageBox.Show("Student name: " + firstName + " " +"\n"+ "Gender: " + gender+ " " + "\n" + "Date of birth: " 
-                + comboBox1.Text + "/" + comboBox2.Text + "/"+ comboBox3.Text );   
+                + comboBox1.Text + "/" + comboBox2.Text + "/"+ comboBox3.Text + "\nProgram: "+ comboBox4.Text);   
         }
     }
 }
