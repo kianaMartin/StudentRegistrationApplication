@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 namespace StudentRegistrationApplication
 {
     public partial class Form1 : Form
@@ -54,12 +55,6 @@ namespace StudentRegistrationApplication
         {
 
         }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void label5_Click(object sender, EventArgs e)
         {
 
@@ -72,22 +67,70 @@ namespace StudentRegistrationApplication
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string firstName, lastName, middleName;
+            string lastName, firstName, middleName;
             string gender = "";
-         
-            firstName = textBox1.Text;
-            lastName = textBox2.Text;
+            string programApply = comboBox4.Text;
+            string day = comboBox1.Text;
+            string month = comboBox2.Text;
+            string year = comboBox3.Text;
+            lastName = textBox1.Text;
+            firstName = textBox2.Text;
             middleName = textBox3.Text;
+
+        
             if (radioButton1.Checked)
             {
-               gender = radioButton1.Text;
+                gender = radioButton1.Text;
             }
             else
             {
                 gender = radioButton2.Text;
             }
-            MessageBox.Show("Student name: " + firstName + " " +"\n"+ "Gender: " + gender+ " " + "\n" + "Date of birth: " 
-                + comboBox1.Text + "/" + comboBox2.Text + "/"+ comboBox3.Text + "\nProgram: "+ comboBox4.Text);   
+            if (firstName != null && middleName != null && lastName != null && (radioButton1.Checked || radioButton2.Checked) && day != "-Day-" && month != "-Month-" && year != "-Year-" && programApply != null)
+            {
+                stInfo(firstName, middleName, lastName, gender, day, month, year, programApply);
+
+            }
+            else if (firstName != null && middleName == " " && lastName != null && !radioButton1.Checked && !radioButton2.Checked && day == "-Day-" && month == "-Month-" && year == "-Year-" && programApply != null)
+            {
+                stInfo(firstName, lastName, programApply);
+            }
+            else if (firstName != null && middleName != null && lastName != null && !radioButton1.Checked && !radioButton2.Checked && day == "-Day-" && month == "-Month-" && year == "-Year-" && programApply != null)
+            {
+                stInfo(firstName, middleName, lastName, programApply);
+            }
+        }
+        private void stInfo(string firstName, string middleName, string lastName, string gender, string day, string month, string year, string programApply)
+        {
+            MessageBox.Show("Student Name: " + lastName + " " + firstName + " " + middleName + "\n" + "Gender: " + gender + "\nProgram: " + programApply + "\n" +
+                "Date of birth: " + day + " / " + month + " / " + year);
+        }
+        private void stInfo(string firstName, string middleName, string lastName, string programApply)
+        {
+            MessageBox.Show("Student name: " + firstName + " " + middleName + " " + lastName + "\n" +
+                "Program: " + programApply);
+        }
+        private void stInfo(string firstName, string lastName, string programApply)
+        {
+            MessageBox.Show("Student name: " + firstName + " " + lastName + "\n" +
+                "Program: " + programApply);
+        }
+        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+        }
+        private void DisplayStudentInfo(string message)
+        {
+            MessageBox.Show(message, "Student Information");
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.InitialDirectory = "";
+            openFileDialog1.Title = "Profiles";
+            openFileDialog1.ShowDialog();
+            pictureBox1.Image = Image.FromFile(openFileDialog1.FileName);
         }
     }
 }
+
+      
